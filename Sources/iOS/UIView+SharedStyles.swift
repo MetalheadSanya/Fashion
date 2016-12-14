@@ -10,7 +10,7 @@ extension UIView {
 
   override open class func initialize() {
     struct Static {
-      static let token = NSUUID().uuidString
+      static let token = UUID().uuidString
     }
 
     if self !== UIView.self { return }
