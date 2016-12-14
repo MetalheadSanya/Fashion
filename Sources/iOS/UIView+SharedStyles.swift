@@ -1,4 +1,5 @@
 import UIKit
+import Foundation
 
 extension UIView {
 
@@ -8,14 +9,12 @@ extension UIView {
 
   // MARK: - Method Swizzling
 
-  override open class func initialize() {
-    struct Static {
-      static let token = UUID().uuidString
-    }
+  static let token = UUID().uuidString
 
+  override open class func initialize() {
     if self !== UIView.self { return }
 
-    DispatchQueue.once(token: Static.token) {
+    DispatchQueue.once(token: UIView.token) {
       Swizzler.swizzle(method: "willMoveToSuperview:", cls: self, prefix: "fashion")
     }
   }
